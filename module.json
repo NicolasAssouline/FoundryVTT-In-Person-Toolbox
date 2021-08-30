@@ -2,8 +2,7 @@
   "name": "mobile-token-movement",
   "title": "Mobile Token Movement",
   "description": "Use your mobile device to control your token. Useful for in-person games with a public scene monitor using the module Monk's Common Display.",
-  "version": "0.0.1",
-  "library": "false",
+  "version": "1.0.0",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.9",
   "author": "Matthijs Kok",
@@ -26,7 +25,7 @@
     }
   ],
   "socket": true,
-  "url": "This is auto replaced",
-  "manifest": "This is auto replaced",
-  "download": "This is auto replaced"
+  "url": "https://gitlab.com/MatthijsKok/mobile-token-movement",
+  "manifest": "https://gitlab.com/MatthijsKok/mobile-token-movement/raw/main/module.json",
+  "download": "https://gitlab.com/MatthijsKok/mobile-token-movement/raw/main/bundled/mtm-1.0.0.json"
 }
