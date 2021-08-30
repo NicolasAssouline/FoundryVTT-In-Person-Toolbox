@@ -1,0 +1,32 @@
+{
+  "name": "mobile-token-movement",
+  "title": "Mobile Token Movement",
+  "description": "Use your mobile device to control your token. Useful for in-person games with a public scene monitor using the module Monk's Common Display.",
+  "version": "0.0.1",
+  "library": "false",
+  "minimumCoreVersion": "0.8.6",
+  "compatibleCoreVersion": "0.8.9",
+  "author": "Matthijs Kok",
+  "esmodules": [
+    "scripts/module.js"
+  ],
+  "styles": [
+    "styles/module.css"
+  ],
+  "dependencies": [
+    {
+      "name": "socketlib"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "socket": true,
+  "url": "This is auto replaced",
+  "manifest": "This is auto replaced",
+  "download": "This is auto replaced"
+}

@@ -1,0 +1,30 @@
+<div id="mobile-token-movement-settings">
+    <form class="flexcol">
+        <p class="notes">{{ localize 'MobileTokenMovement.note'}}</p>
+        <table>
+            <thead>
+            <tr>
+                <td>{{ localize 'MobileTokenMovement.players'}}</td>
+                <td>{{ localize 'MobileTokenMovement.mobile'}}</td>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each players}}
+                <tr data-item-id="{{ this.id }}">
+                    <td>{{ this.name }}</td>
+                    <td>
+                        <label>
+                            <input type="checkbox" {{#if this.mobile }}checked{{/if}}/>
+                        </label>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </form>
+    <div class="dialog-buttons">
+        <button class="dialog-buttons save" data-button="request">
+            <i class="fas fa-save"></i> {{ localize 'MobileTokenMovement.save'}}
+        </button>
+    </div>
+</div>

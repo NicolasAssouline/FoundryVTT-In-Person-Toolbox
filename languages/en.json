@@ -1,0 +1,8 @@
+{
+    "MobileTokenMovement": {
+        "note": "Select which user will see the token movement interface when on a mobile device.",
+        "save": "Save",
+        "players": "Players",
+        "mobile": "Mobile"
+    }
+}

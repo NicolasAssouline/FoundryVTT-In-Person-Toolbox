@@ -1,0 +1,35 @@
+/* Settings Menu */
+#mobile-token-movement-settings table td:nth-child(1) {
+    width: 100%;
+}
+
+#mobile-token-movement-settings table td:nth-child(2) {
+    text-align: center;
+    padding-right: 3px;
+}
+
+#mobile-token-movement-controls {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 15vh;
+    box-shadow: 0 0 20px #000;
+}
+
+/* Mobile Controls */
+@media only screen and (max-width: 600px) {
+    body.enable-mobile-token-movement-ui > *:not(#mobile-token-movement-controls):not(#board):not(#hud):not(#confetti-canvas):not(#dice-box-canvas):not(#pause):not(#notifications):not(#loading):not(#narrator),
+    body.enable-mobile-token-movement-ui #hud > *:not(#image-hover-hud):not(#healthEstimate) {
+        display: none !important;
+    }
+
+    body.enable-mobile-token-movement-ui #mobile-token-movement-controls {
+        display: flex !important;
+    }
+
+    body.enable-mobile-token-movement-ui {
+        touch-action: manipulation;
+    }
+}
