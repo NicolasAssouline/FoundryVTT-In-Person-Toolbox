@@ -26,16 +26,16 @@ export class MobileControls extends Application {
     let t = this.getToken()
     const newX = t.x + t.w * x
     const newY = t.y + t.h * y
-    canvas.animatePan({
-      duration: 250,
-      x: newX + t.w / 2,
-      y: newY + t.h / 2,
-      scale: canvas.scene._viewPosition.scale,
-    })
-    t.document.update({
-      x: newX,
-      y: newY
-    })
+    const newPoint = canvas.grid.getSnappedPosition(newX, newY)
+    if (!t.checkCollision(newPoint)) {
+      t.document.update(newPoint)
+      canvas.animatePan({
+        duration: 250,
+        x: newPoint.x + t.w / 2,
+        y: newPoint.y + t.h / 2,
+        scale: canvas.scene._viewPosition.scale,
+      })
+    }
   }
 
   selectToken() {
