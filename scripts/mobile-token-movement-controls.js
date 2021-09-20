@@ -1,16 +1,11 @@
-import { MODULE_NAME, MODULE_TITLE } from './config.js'
-
-export class MobileControls extends Application {
+export class MobileTokenMovementControls extends Application {
   constructor(options = {}) {
     super(options)
   }
 
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      id: MODULE_NAME,
-      title: MODULE_TITLE,
-      template: `./modules/${MODULE_NAME}/templates/mobile-controls.html`,
-      width: 250,
+      template: `./modules/mobile-token-movement/templates/mobile-token-movement-controls.html`,
       popOut: false,
     })
   }
@@ -24,8 +19,8 @@ export class MobileControls extends Application {
 
   move(x, y) {
     let t = this.getToken()
-    const newX = t.x + t.w * x
-    const newY = t.y + t.h * y
+    let newX = t.x + t.w * x
+    let newY = t.y + t.h * y
     const newPoint = canvas.grid.getSnappedPosition(newX, newY)
     if (!t.checkCollision(newPoint)) {
       t.document.update(newPoint)

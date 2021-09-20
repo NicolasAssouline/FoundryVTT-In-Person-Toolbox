@@ -1,8 +1,9 @@
 {
-    "MobileTokenMovement": {
-        "note": "Select which user will see the token movement interface when on a mobile device.",
-        "save": "Save",
-        "players": "Players",
-        "mobile": "Mobile"
+  "MobileTokenMovement": {
+    "dialog": {
+      "content": "It looks like you are using a mobile device. Would you like to enable the Mobile Token Movement UI?",
+      "cancel": "Cancel",
+      "enable": "Enable"
     }
+  }
 }

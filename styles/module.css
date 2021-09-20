@@ -1,13 +1,3 @@
-/* Settings Menu */
-#mobile-token-movement-settings table td:nth-child(1) {
-    width: 100%;
-}
-
-#mobile-token-movement-settings table td:nth-child(2) {
-    text-align: center;
-    padding-right: 3px;
-}
-
 #mobile-token-movement-controls {
     display: none;
     position: absolute;
@@ -18,18 +8,37 @@
     box-shadow: 0 0 20px #000;
 }
 
-/* Mobile Controls */
 @media only screen and (max-width: 600px) {
     body.enable-mobile-token-movement-ui > *:not(#mobile-token-movement-controls):not(#board):not(#hud):not(#confetti-canvas):not(#dice-box-canvas):not(#pause):not(#notifications):not(#loading):not(#narrator),
     body.enable-mobile-token-movement-ui #hud > *:not(#image-hover-hud):not(#healthEstimate) {
         display: none !important;
     }
 
+    body.enable-mobile-token-movement-ui {
+        touch-action: manipulation;
+    }
+
     body.enable-mobile-token-movement-ui #mobile-token-movement-controls {
         display: flex !important;
     }
 
-    body.enable-mobile-token-movement-ui {
-        touch-action: manipulation;
+    body.enable-mobile-token-movement-ui #mobile-token-movement-controls .mtmc-topleft i {
+        transform: rotate(45deg);
+        text-align-last: left;
+    }
+
+    body.enable-mobile-token-movement-ui #mobile-token-movement-controls .mtmc-bottomleft i {
+        transform: rotate(-45deg);
+        text-align-last: left;
+    }
+
+    body.enable-mobile-token-movement-ui #mobile-token-movement-controls .mtmc-topright i {
+        transform: rotate(135deg);
+        text-align-last: left;
+    }
+
+    body.enable-mobile-token-movement-ui #mobile-token-movement-controls .mtmc-bottomright i {
+        transform: rotate(-135deg);
+        text-align-last: left;
     }
 }
