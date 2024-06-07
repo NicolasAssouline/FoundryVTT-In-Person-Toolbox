@@ -1,7 +1,7 @@
 import { MobileTokenMovementControls } from './mobile-token-movement-controls.js'
 
 Hooks.once('ready', () => {
-  const isMobileDevice = game.canvas.app.screen.width <= 600
+  const isMobileDevice = game.canvas.app.screen.width <= 600 || game.canvas.app.screen.height <= 600
   new Dialog({
     title: 'Mobile Token Movement',
     content: game.i18n.localize('MobileTokenMovement.dialog.content'),
