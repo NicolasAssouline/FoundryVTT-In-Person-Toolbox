@@ -1,10 +1,10 @@
 #mobile-token-movement-controls {
     display: none;
     position: absolute;
-    bottom: 0;
+    bottom: 20vh;
     left: 0;
     right: 0;
-    height: 0;
+    height: 15vh;
     box-shadow: 0 0 20px #000;
 }
 
