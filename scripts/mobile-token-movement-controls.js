@@ -22,13 +22,13 @@ export class MobileTokenMovementControls extends Application {
     }
 
     async move(x, y) {
-        let t = this.getToken()
+        const t = this.getToken();
         if (!t) return
 
-        const newPoint = {x: t.x + t.w * x, y: t.y + t.h * y}
+        const newPoint = { x: t.x + t.w * x, y: t.y + t.h * y }
         console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)}, Collision: ${t.checkCollision(newPoint)}`)
 
-        if (!t.checkCollision(newPoint)) {
+        if (!t.checkCollision(newPoint) && t.document.canUserModify(user, "update")) {
             await t.document.update(newPoint)
             await canvas.animatePan({
                 duration: 250,
@@ -39,12 +39,12 @@ export class MobileTokenMovementControls extends Application {
         }
     }
 
-    async selectToken() {
+    selectToken = async () => {
         if (++this.tokenCycleIndex >= canvas.tokens.controlled.length) {
             this.tokenCycleIndex = 0
         }
 
-        let t = this.getToken()
+        const t = this.getToken();
         if (!t) return
 
         await canvas.animatePan({
@@ -53,7 +53,7 @@ export class MobileTokenMovementControls extends Application {
             y: t.y + t.h / 2,
             scale: canvas.scene._viewPosition.scale,
         })
-    }
+    };
 
     async zoomIn() {
         const view = canvas.scene._viewPosition
