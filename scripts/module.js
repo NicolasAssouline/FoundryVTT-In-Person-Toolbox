@@ -40,11 +40,6 @@ Hooks.once('ready', () => {
         (minScreenWidth > 0 || minScreenHeight > 0) &&
         (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight);
 
-    // debugging firefox issue
-    ui.notifications.warn(
-        `Screen parameters: ${minScreenHeight}, ${minScreenWidth}, ${game.canvas.app.screen.width}, ${game.canvas.app.screen.height}`
-    );
-
     new Dialog({
         title: 'Mobile Token Movement',
         content: game.i18n.localize('MobileTokenMovement.dialog.content'),

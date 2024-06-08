@@ -1,10 +1,10 @@
 {
   "name": "mobile-token-movement-revived",
   "title": "Mobile Token Movement Revived",
-  "description": "Use your mobile device to control your token with a minimal interface. Useful for in-person games with a player-facing monitor.",
+  "description": "Use your mobile device to control your token with a minimal interface. Useful for in-person games with a player-facing monitor.\nIt is recommended to use Chrome for Android as some Firefox versions have issues properly activating the mobile interface",
   "author": "Matthijs Kok && Nicolas Assouline",
   "url": "https://github.com/NicolasAssouline/mobile-token-movement",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
@@ -23,5 +23,5 @@
     }
   ],
   "manifest": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/module.json",
-  "download": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/bundled/mtm-1.0.15.zip"
+  "download": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/bundled/mtm-1.0.16.zip"
 }
