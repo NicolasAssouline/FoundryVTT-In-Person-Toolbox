@@ -1,3 +1,6 @@
+![Foundry VTT](https://img.shields.io/badge/Foundry-Version11-informational)
+
+
 # FoundryVTT Mobile Token Movement (revived)
 
 _Credit for the base version goes to [Matthijs Kok](https://gitlab.com/MatthijsKok)_
