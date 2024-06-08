@@ -8,7 +8,7 @@
     box-shadow: 0 0 20px #000;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen {
     body.enable-mobile-token-movement-ui > *:not(#mobile-token-movement-controls):not(#board):not(#hud):not(#confetti-canvas):not(#dice-box-canvas):not(#pause):not(#notifications):not(#loading):not(#narrator),
     body.enable-mobile-token-movement-ui #hud > *:not(#image-hover-hud):not(#healthEstimate) {
         display: none !important;
