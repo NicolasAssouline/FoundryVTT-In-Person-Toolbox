@@ -4,6 +4,9 @@
       "content": "It looks like you are using a mobile device. Would you like to enable the Mobile Token Movement UI?",
       "cancel": "Cancel",
       "enable": "Enable"
+    },
+    "warn": {
+      "noTokenSelected": "No tokens selected - Please select at least one"
     }
   }
 }

@@ -27,12 +27,12 @@ Hooks.once('init', () => {
 })
 
 Hooks.once('ready', () => {
-    const minScreenWidth = game.settings.get(moduleName, minWidthSettingName)
-    const minScreenHeight = game.settings.get(moduleName, minHeightSettingName)
+    const minScreenWidth = game.settings.get(moduleName, minWidthSettingName);
+    const minScreenHeight = game.settings.get(moduleName, minHeightSettingName);
 
     const isMobileDevice =
         (minScreenWidth > 0 || minScreenHeight > 0) &&
-        (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight)
+        (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight);
 
     new Dialog({
         title: 'Mobile Token Movement',
@@ -52,5 +52,5 @@ Hooks.once('ready', () => {
                 }
             }
         }
-    }).render(isMobileDevice)
-})
+    }).render(isMobileDevice);
+});

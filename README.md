@@ -1,6 +1,6 @@
 # FoundryVTT Mobile Token Movement (revived)
 
-_Credit for the base version goes to [MatthijsKok](https://gitlab.com/MatthijsKok)_
+_Credit for the base version goes to [Matthijs Kok](https://gitlab.com/MatthijsKok)_
 
 The original was outdated and didn't work for the current FoundryVTT version - This module looked perfect for use 
 when DM-ing for my in-person group, so I updated it to work with FoundryVTT 11, polished up the code and added a couple new features
@@ -10,7 +10,8 @@ This repository is a reupload due to [the original](https://gitlab.com/MatthijsK
 ## New features:
 - The minimum width to trigger the mobile layout is now configurable through the settings menu
 - Added a user-configurable minimum height requirement (both requirements can be toggled on/off)
-- Tapping the select button now cycles through selected tokens so it's easier to move larger groups around
+- Tapping the select button now first centers the view on your currently selected token and 
+  then cycles through selected tokens, so it's easier to move larger groups around
 - More stringent permission checks to prevent player-facing error popups when trying to move un-owned characters
 
 ## Recommended modules

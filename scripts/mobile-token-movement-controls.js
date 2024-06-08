@@ -1,52 +1,54 @@
 export class MobileTokenMovementControls extends Application {
-    tokenCycleIndex = 0
+    VIEWPOINT_PAN_THRESHOLD_MULTIPLIER = 2;
+    tokenCycleIndex = 0;
 
 
     constructor(options = {}) {
-        super(options)
+        super(options);
     }
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            template: `./modules/mobile-token-movement/templates/mobile-token-movement-controls.html`,
-            popOut: false,
-        })
+            template: `./modules/mobile-token-movement/templates/mobile-token-movement-controls.html`, popOut: false,
+        });
     }
 
     getToken = () => {
         if (canvas.tokens.controlled.length === 0) {
-            ui.notifications.warn('No tokens selected - Please select at least one');
-            return
+            ui.notifications.warn(game.i18n.localize('MobileTokenMovement.warn.noTokenSelected'));
+            return;
         }
 
-        this.clipCycleIndexValue()
-        return canvas.tokens.controlled[this.tokenCycleIndex]
+        this.clipCycleIndexValue();
+        return canvas.tokens.controlled[this.tokenCycleIndex];
     };
 
     async move(x, y) {
         const t = this.getToken();
-        if (!t) return
+        if (!t) return;
 
-        const newPoint = { x: t.x + t.w * x, y: t.y + t.h * y }
-        console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)}, Collision: ${t.checkCollision(newPoint)}`)
+        const newPoint = {x: t.x + t.w * x, y: t.y + t.h * y};
+        console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)}, Collision: ${t.checkCollision(newPoint)}`);
 
         if (!t.checkCollision(newPoint) && t.document.canUserModify(game.user, "update")) {
-            await t.document.update(newPoint)
+            await t.document.update(newPoint);
             await canvas.animatePan({
                 duration: 250,
                 x: Math.round(newPoint.x + t.w / 2),
                 y: Math.round(newPoint.y + t.h / 2),
                 scale: canvas.scene._viewPosition.scale,
-            })
+            });
         }
     }
 
     selectToken = async () => {
-        this.tokenCycleIndex++
-        this.clipCycleIndexValue()
+
+        if (this.isViewCentered()) {
+            this.cycleActiveToken();
+        }
 
         const t = this.getToken();
-        if (!t) return
+        if (!t) return;
 
         await canvas.animatePan({
             duration: 150,
@@ -56,31 +58,46 @@ export class MobileTokenMovementControls extends Application {
         })
     };
 
-    clipCycleIndexValue = () => {
-        if (this.tokenCycleIndex >= canvas.tokens.controlled.length) {
-            this.tokenCycleIndex = 0
+    isViewCentered = () => {
+        const currentViewPosition = canvas.scene._viewPosition;
+
+        const token = this.getToken();
+        if (!token) return true;
+
+        const tokenX = token.x + token.w / 2;
+        const tokenY = token.y + token.h / 2;
+
+        const viewCenterToTokenDistance = this.calculatePointDistance(currentViewPosition.x, currentViewPosition.y, tokenX, tokenY);
+        return viewCenterToTokenDistance < Math.max(token.w, token.h) * this.VIEWPOINT_PAN_THRESHOLD_MULTIPLIER;
+    };
+
+    calculatePointDistance = (x1, y1, x2, y2) => {
+        const x = x2 - x1;
+        const y = y2 - y1;
+
+        return Math.sqrt(x * x + y * y);
+    };
+
+    cycleActiveToken = () => {
+        if (++this.tokenCycleIndex >= canvas.tokens.controlled.length) {
+            this.tokenCycleIndex = 0;
         }
     };
 
+
     async zoomIn() {
-        const view = canvas.scene._viewPosition
+        const view = canvas.scene._viewPosition;
         await canvas.animatePan({
-            duration: 200,
-            x: view.x,
-            y: view.y,
-            scale: view.scale * 1.25,
-        })
-    }
+            duration: 200, x: view.x, y: view.y, scale: view.scale * 1.25,
+        });
+    };
 
     async zoomOut() {
-        const view = canvas.scene._viewPosition
+        const view = canvas.scene._viewPosition;
         await canvas.animatePan({
-            duration: 200,
-            x: view.x,
-            y: view.y,
-            scale: view.scale * 0.80,
-        })
-    }
+            duration: 200, x: view.x, y: view.y, scale: view.scale * 0.80,
+        });
+    };
 
     moveTopLeft = async () => this.move(-1, -1);
 
