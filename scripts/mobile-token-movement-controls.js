@@ -1,6 +1,7 @@
 export class MobileTokenMovementControls extends Application {
     tokenCycleIndex = 0
 
+
     constructor(options = {}) {
         super(options)
     }
@@ -12,14 +13,15 @@ export class MobileTokenMovementControls extends Application {
         })
     }
 
-    getToken() {
+    getToken = () => {
         if (canvas.tokens.controlled.length === 0) {
             ui.notifications.warn('No tokens selected - Please select at least one');
             return
         }
 
+        this.clipCycleIndexValue()
         return canvas.tokens.controlled[this.tokenCycleIndex]
-    }
+    };
 
     async move(x, y) {
         const t = this.getToken();
@@ -40,9 +42,8 @@ export class MobileTokenMovementControls extends Application {
     }
 
     selectToken = async () => {
-        if (++this.tokenCycleIndex >= canvas.tokens.controlled.length) {
-            this.tokenCycleIndex = 0
-        }
+        this.tokenCycleIndex++
+        this.clipCycleIndexValue()
 
         const t = this.getToken();
         if (!t) return
@@ -53,6 +54,12 @@ export class MobileTokenMovementControls extends Application {
             y: t.y + t.h / 2,
             scale: canvas.scene._viewPosition.scale,
         })
+    };
+
+    clipCycleIndexValue = () => {
+        if (this.tokenCycleIndex >= canvas.tokens.controlled.length) {
+            this.tokenCycleIndex = 0
+        }
     };
 
     async zoomIn() {
