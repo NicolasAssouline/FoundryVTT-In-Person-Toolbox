@@ -1,0 +1,27 @@
+name: Zip and Publish Artifact
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zip-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get package version
+        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+
+      - name: Bundle module
+        run: |
+          zip -r ${{ github.event.repository.name }}-${{ env.version }}.zip languages scripts styles templates LICENSE module.json package.json README.md
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Bundle
+          path: ${{ github.event.repository.name }}-${{ env.version }}.zip

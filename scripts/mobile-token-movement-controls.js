@@ -13,7 +13,7 @@ export class MobileTokenMovementControls extends Application {
         });
     }
 
-    getToken = () => {
+    getActiveToken = () => {
         if (canvas.tokens.controlled.length === 0) {
             ui.notifications.warn(game.i18n.localize('MobileTokenMovement.warn.noTokenSelected'));
             return;
@@ -24,7 +24,7 @@ export class MobileTokenMovementControls extends Application {
     };
 
     async move(x, y) {
-        const token = this.getToken();
+        const token = this.getActiveToken();
         if (!token) return;
 
         const newPoint = {x: token.x + token.w * x, y: token.y + token.h * y};
@@ -52,7 +52,7 @@ export class MobileTokenMovementControls extends Application {
             this.cycleActiveToken();
         }
 
-        const t = this.getToken();
+        const t = this.getActiveToken();
         if (!t) return;
 
         await canvas.animatePan({
@@ -66,7 +66,7 @@ export class MobileTokenMovementControls extends Application {
     isViewCentered = () => {
         const currentViewPosition = canvas.scene._viewPosition;
 
-        const token = this.getToken();
+        const token = this.getActiveToken();
         if (!token) return true;
 
         const tokenX = token.x + token.w / 2;
