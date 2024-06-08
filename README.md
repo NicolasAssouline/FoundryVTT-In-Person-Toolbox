@@ -1,4 +1,13 @@
-# FoundryVTT Mobile Token Movement
+# FoundryVTT Mobile Token Movement (revived)
+
+_Credit for the base version goes to [MatthijsKok](https://gitlab.com/MatthijsKok)_
+
+The original was outdated and didn't work for the current FoundryVTT version - this module was perfect for use with my group 
+so I updated it to work with FoundryVTT 11, polished up the code and added a couple new features
+
+This repository is a reupload due to [the original](https://gitlab.com/MatthijsKok/mobile-token-movement) being on Gitlab
+
+---
 
 Use your mobile device to control your token with a minimal interface.  
 Useful for in-person games with a player-facing monitor using the module Monk's Common Display.  
