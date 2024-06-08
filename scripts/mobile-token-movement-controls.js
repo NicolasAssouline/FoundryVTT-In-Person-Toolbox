@@ -28,7 +28,7 @@ export class MobileTokenMovementControls extends Application {
         const newPoint = { x: t.x + t.w * x, y: t.y + t.h * y }
         console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)}, Collision: ${t.checkCollision(newPoint)}`)
 
-        if (!t.checkCollision(newPoint) && t.document.canUserModify(user, "update")) {
+        if (!t.checkCollision(newPoint) && t.document.canUserModify(game.user, "update")) {
             await t.document.update(newPoint)
             await canvas.animatePan({
                 duration: 250,
