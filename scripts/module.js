@@ -1,4 +1,5 @@
-import {MobileTokenMovementControls} from './mobile-token-movement-controls.js'
+import { MobileTokenMovementControls } from './mobile-token-movement-controls';
+import { DEBUG_MESSAGES_SETTING_NAME, MIN_HEIGHT_SETTING_NAME, MIN_WIDTH_SETTING_NAME, MODULE_NAME } from './constants';
 
 Hooks.once('init', () => {
     game.settings.register(MODULE_NAME, MIN_WIDTH_SETTING_NAME, {
@@ -21,14 +22,13 @@ Hooks.once('init', () => {
         requiresReload: true
     });
 
-    game.settings.register(MODULE_NAME, 'debug-messages', {
+    game.settings.register(MODULE_NAME, DEBUG_MESSAGES_SETTING_NAME, {
         name: "Write debug messages to the console",
         hint: "Write debug messages to the console to diagnose issues more easily. Turn off to reduce clutter",
         scope: "world",
         config: true,
         default: false,
         type: Boolean,
-        requiresReload: false
     });
 })
 
@@ -39,6 +39,11 @@ Hooks.once('ready', () => {
     const isMobileDevice =
         (minScreenWidth > 0 || minScreenHeight > 0) &&
         (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight);
+
+    // debugging firefox issue
+    ui.notifications.warn(
+        `Screen parameters: ${minScreenHeight}, ${minScreenWidth}, ${game.canvas.app.screen.width}, ${game.canvas.app.screen.height}`
+    );
 
     new Dialog({
         title: 'Mobile Token Movement',

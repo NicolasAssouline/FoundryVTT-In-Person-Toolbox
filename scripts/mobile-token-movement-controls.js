@@ -1,3 +1,5 @@
+import { CONTROLS_TEMPLATE_PATH, DEBUG_MESSAGES_SETTING_NAME, MODULE_NAME } from "./constants";
+
 export class MobileTokenMovementControls extends Application {
     tokenCycleIndex = 0;
 
@@ -22,21 +24,23 @@ export class MobileTokenMovementControls extends Application {
     };
 
     async move(x, y) {
-        const t = this.getToken();
-        if (!t) return;
+        const token = this.getToken();
+        if (!token) return;
 
-        const newPoint = {x: t.x + t.w * x, y: t.y + t.h * y};
+        const newPoint = {x: token.x + token.w * x, y: token.y + token.h * y};
 
         if (game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING_NAME)) {
-            console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)} (Collision: ${t.checkCollision(newPoint)})`);
+            console.info(
+                `Attempting to move token from (${token.x}, ${token.y}) to ${JSON.stringify(newPoint)} (Collision: ${token.checkCollision(newPoint)})`
+            );
         }
 
-        if (!t.checkCollision(newPoint) && t.document.canUserModify(game.user, "update")) {
-            await t.document.update(newPoint);
+        if (!token.checkCollision(newPoint) && token.document.canUserModify(game.user, "update")) {
+            await token.document.update(newPoint);
             await canvas.animatePan({
                 duration: 250,
-                x: Math.round(newPoint.x + t.w / 2),
-                y: Math.round(newPoint.y + t.h / 2),
+                x: Math.round(newPoint.x + token.w / 2),
+                y: Math.round(newPoint.y + token.h / 2),
                 scale: canvas.scene._viewPosition.scale,
             });
         }
