@@ -1,9 +1,6 @@
 name: Zip and Publish Artifact
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
   zip-and-publish:
@@ -18,10 +15,13 @@ jobs:
 
       - name: Bundle module
         run: |
-          zip -r ${{ github.event.repository.name }}-${{ env.version }}.zip languages scripts styles templates LICENSE module.json package.json README.md
+          zip -r ${{ github.event.repository.name }}.zip languages scripts styles templates LICENSE module.json package.json README.md
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Release
+        uses: softprops/action-gh-release@v2
         with:
-          name: Bundle
-          path: ${{ github.event.repository.name }}-${{ env.version }}.zip
+          files: ${{ github.event.repository.name }}.zip
+          name: "${{ github.event.repository.name }} - version ${{ env.version }}"
+          make_latest: true
+          tag_name: version ${{ env.version }}
+          generate_release_notes: true
