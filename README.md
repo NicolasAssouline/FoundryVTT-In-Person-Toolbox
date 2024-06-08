@@ -2,7 +2,7 @@
 
 _Credit for the base version goes to [MatthijsKok](https://gitlab.com/MatthijsKok)_
 
-The original was outdated and didn't work for the current FoundryVTT version - this module was perfect for use with my group 
+The original was outdated and didn't work for the current FoundryVTT version - this module looked perfect for use when DM-ing for my group 
 so I updated it to work with FoundryVTT 11, polished up the code and added a couple new features
 
 This repository is a reupload due to [the original](https://gitlab.com/MatthijsKok/mobile-token-movement) being on Gitlab
