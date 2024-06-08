@@ -7,7 +7,7 @@ const minHeightSettingName = 'min-height'
 Hooks.once('init', () => {
     game.settings.register(moduleName, minWidthSettingName, {
         name: "Minimum screen width (px)",
-        hint: "The minimum screen width in pixels to trigger the mobile UI (set to 0 to disable)",
+        hint: "The minimum screen width in pixels to trigger the mobile UI (set to 0 to disable condition)",
         scope: "world",
         config: true,
         default: 600,
@@ -17,7 +17,7 @@ Hooks.once('init', () => {
 
     game.settings.register(moduleName, minHeightSettingName, {
         name: "Minimum screen height (px)",
-        hint: "The minimum screen height in pixels to trigger the mobile UI (set to 0 to disable)",
+        hint: "The minimum screen height in pixels to trigger the mobile UI (set to 0 to disable condition)",
         scope: "world",
         config: true,
         default: 0,
@@ -31,7 +31,7 @@ Hooks.once('ready', () => {
     const minScreenHeight = game.settings.get(moduleName, minHeightSettingName)
 
     const isMobileDevice =
-        minScreenWidth > 0 && minScreenHeight > 0 &&
+        (minScreenWidth > 0 || minScreenHeight > 0) &&
         (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight)
 
     new Dialog({
