@@ -79,11 +79,15 @@ export class MobileTokenMovementControls extends Application {
     };
 
     cycleActiveToken = () => {
-        if (++this.tokenCycleIndex >= canvas.tokens.controlled.length) {
+        this.tokenCycleIndex++
+        this.clipCycleIndexValue()
+    };
+
+    clipCycleIndexValue = () => {
+        if (this.tokenCycleIndex >= canvas.tokens.controlled.length) {
             this.tokenCycleIndex = 0;
         }
     };
-
 
     async zoomIn() {
         const view = canvas.scene._viewPosition;
