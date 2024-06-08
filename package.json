@@ -1,6 +1,6 @@
 {
   "name": "mobile-token-movement-revived",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "author": "Matthijs Kok && Nicolas Assouline",
   "scripts": {
     "package": "zip -r bundled/mtm-$npm_package_version.zip languages scripts styles templates LICENSE module.json package.json README.md"

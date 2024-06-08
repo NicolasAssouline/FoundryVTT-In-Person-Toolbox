@@ -1,5 +1,5 @@
-import { MobileTokenMovementControls } from './mobile-token-movement-controls';
-import { DEBUG_MESSAGES_SETTING_NAME, MIN_HEIGHT_SETTING_NAME, MIN_WIDTH_SETTING_NAME, MODULE_NAME } from './constants';
+import { MobileTokenMovementControls } from './mobile-token-movement-controls.js';
+import { DEBUG_MESSAGES_SETTING_NAME, MIN_HEIGHT_SETTING_NAME, MIN_WIDTH_SETTING_NAME, MODULE_NAME } from './constants.js';
 
 Hooks.once('init', () => {
     game.settings.register(MODULE_NAME, MIN_WIDTH_SETTING_NAME, {

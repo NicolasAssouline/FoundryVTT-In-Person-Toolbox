@@ -1,4 +1,4 @@
-import { CONTROLS_TEMPLATE_PATH, DEBUG_MESSAGES_SETTING_NAME, MODULE_NAME } from "./constants";
+import { CONTROLS_TEMPLATE_PATH, DEBUG_MESSAGES_SETTING_NAME, MODULE_NAME } from "./constants.js";
 
 export class MobileTokenMovementControls extends Application {
     tokenCycleIndex = 0;

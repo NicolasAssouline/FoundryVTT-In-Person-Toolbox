@@ -4,7 +4,7 @@
   "description": "Use your mobile device to control your token with a minimal interface. Useful for in-person games with a player-facing monitor.",
   "author": "Matthijs Kok && Nicolas Assouline",
   "url": "https://github.com/NicolasAssouline/mobile-token-movement",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
@@ -23,5 +23,5 @@
     }
   ],
   "manifest": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/module.json",
-  "download": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/bundled/mtm-1.0.14.zip"
+  "download": "https://github.com/NicolasAssouline/mobile-token-movement/raw/main/bundled/mtm-1.0.15.zip"
 }
