@@ -26,5 +26,5 @@ jobs:
           files: ${{ github.event.repository.name }}.zip
           name: "${{ github.event.repository.name }} - version ${{ env.version }}"
           make_latest: true
-          tag_name: version ${{ env.version }}
+          tag_name: v${{ env.version }}
           generate_release_notes: true
