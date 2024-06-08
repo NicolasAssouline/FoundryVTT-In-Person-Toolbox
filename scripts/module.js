@@ -1,6 +1,6 @@
 import {MobileTokenMovementControls} from './mobile-token-movement-controls.js'
 
-const moduleName = "mobile-token-movement";
+const moduleName = "mobile-token-movement-revived";
 const minWidthSettingName = 'min-width'
 const minHeightSettingName = 'min-height'
 

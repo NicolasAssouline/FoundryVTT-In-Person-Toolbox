@@ -9,7 +9,7 @@ export class MobileTokenMovementControls extends Application {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            template: `./modules/mobile-token-movement/templates/mobile-token-movement-controls.html`, popOut: false,
+            template: `./modules/mobile-token-movement-revived/templates/mobile-token-movement-controls.html`, popOut: false,
         });
     }
 
