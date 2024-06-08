@@ -1,7 +1,5 @@
 export class MobileTokenMovementControls extends Application {
-    VIEWPOINT_PAN_THRESHOLD_MULTIPLIER = 2;
     tokenCycleIndex = 0;
-
 
     constructor(options = {}) {
         super(options);
@@ -9,7 +7,7 @@ export class MobileTokenMovementControls extends Application {
 
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            template: `./modules/mobile-token-movement-revived/templates/mobile-token-movement-controls.html`, popOut: false,
+            template: CONTROLS_TEMPLATE_PATH, popOut: false,
         });
     }
 
@@ -28,7 +26,10 @@ export class MobileTokenMovementControls extends Application {
         if (!t) return;
 
         const newPoint = {x: t.x + t.w * x, y: t.y + t.h * y};
-        console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)}, Collision: ${t.checkCollision(newPoint)}`);
+
+        if (game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING_NAME)) {
+            console.info(`Attempting to move token from (${t.x}, ${t.y}) to ${JSON.stringify(newPoint)} (Collision: ${t.checkCollision(newPoint)})`);
+        }
 
         if (!t.checkCollision(newPoint) && t.document.canUserModify(game.user, "update")) {
             await t.document.update(newPoint);
@@ -68,7 +69,7 @@ export class MobileTokenMovementControls extends Application {
         const tokenY = token.y + token.h / 2;
 
         const viewCenterToTokenDistance = this.calculatePointDistance(currentViewPosition.x, currentViewPosition.y, tokenX, tokenY);
-        return viewCenterToTokenDistance < Math.max(token.w, token.h) * this.VIEWPOINT_PAN_THRESHOLD_MULTIPLIER;
+        return viewCenterToTokenDistance < Math.max(token.w, token.h) * VIEWPOINT_PAN_THRESHOLD_MULTIPLIER;
     };
 
     calculatePointDistance = (x1, y1, x2, y2) => {

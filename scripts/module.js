@@ -1,11 +1,7 @@
 import {MobileTokenMovementControls} from './mobile-token-movement-controls.js'
 
-const moduleName = "mobile-token-movement-revived";
-const minWidthSettingName = 'min-width'
-const minHeightSettingName = 'min-height'
-
 Hooks.once('init', () => {
-    game.settings.register(moduleName, minWidthSettingName, {
+    game.settings.register(MODULE_NAME, MIN_WIDTH_SETTING_NAME, {
         name: "Minimum screen width (px)",
         hint: "The minimum screen width in pixels to trigger the mobile UI (set to 0 to disable condition)",
         scope: "world",
@@ -15,7 +11,7 @@ Hooks.once('init', () => {
         requiresReload: true
     });
 
-    game.settings.register(moduleName, minHeightSettingName, {
+    game.settings.register(MODULE_NAME, MIN_HEIGHT_SETTING_NAME, {
         name: "Minimum screen height (px)",
         hint: "The minimum screen height in pixels to trigger the mobile UI (set to 0 to disable condition)",
         scope: "world",
@@ -24,11 +20,21 @@ Hooks.once('init', () => {
         type: Number,
         requiresReload: true
     });
+
+    game.settings.register(MODULE_NAME, 'debug-messages', {
+        name: "Write debug messages to the console",
+        hint: "Write debug messages to the console to diagnose issues more easily. Turn off to reduce clutter",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        requiresReload: false
+    });
 })
 
 Hooks.once('ready', () => {
-    const minScreenWidth = game.settings.get(moduleName, minWidthSettingName);
-    const minScreenHeight = game.settings.get(moduleName, minHeightSettingName);
+    const minScreenWidth = game.settings.get(MODULE_NAME, MIN_WIDTH_SETTING_NAME);
+    const minScreenHeight = game.settings.get(MODULE_NAME, MIN_HEIGHT_SETTING_NAME);
 
     const isMobileDevice =
         (minScreenWidth > 0 || minScreenHeight > 0) &&
