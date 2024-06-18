@@ -2,8 +2,8 @@
   "MobileTokenMovement": {
     "dialog": {
       "content": "It looks like you are using a mobile device. Would you like to enable the Mobile Token Movement UI?",
-      "cancel": "Cancel",
-      "enable": "Enable"
+      "yes": "Yes",
+      "no": "No"
     },
     "warn": {
       "noTokenSelected": "No tokens selected - Please select at least one"

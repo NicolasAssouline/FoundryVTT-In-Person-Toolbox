@@ -1,6 +1,6 @@
 import {
     CONTROLS_TEMPLATE_PATH,
-    DEBUG_MESSAGES_SETTING_NAME,
+    DEBUG_MESSAGES_SETTING,
     MODULE_NAME,
     VIEWPOINT_PAN_THRESHOLD_MULTIPLIER
 } from "./constants.js";
@@ -34,7 +34,7 @@ export class MobileTokenMovementControls extends Application {
 
         const newPoint = {x: token.x + token.w * x, y: token.y + token.h * y};
 
-        if (game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING_NAME)) {
+        if (game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING)) {
             console.info(
                 `Attempting to move token from (${token.x}, ${token.y}) to ${JSON.stringify(newPoint)} (Collision: ${token.checkCollision(newPoint)})`
             );
@@ -51,19 +51,19 @@ export class MobileTokenMovementControls extends Application {
         }
     }
 
-    selectToken = async () => {
+    focusToken = async () => {
 
         if (this.isViewCentered()) {
             this.cycleActiveToken();
         }
 
-        const t = this.getActiveToken();
-        if (!t) return;
+        const token = this.getActiveToken();
+        if (!token) return;
 
         await canvas.animatePan({
             duration: 150,
-            x: t.x + t.w / 2,
-            y: t.y + t.h / 2,
+            x: token.x + token.w / 2,
+            y: token.y + token.h / 2,
             scale: canvas.scene._viewPosition.scale,
         })
     };
@@ -132,7 +132,7 @@ export class MobileTokenMovementControls extends Application {
     activateListeners(html) {
         super.activateListeners(html)
 
-        $('.mtmc-select', html).on('click', this.selectToken)
+        $('.mtmc-select', html).on('click', this.focusToken)
         $('.mtmc-zoomin', html).on('click', this.zoomIn)
         $('.mtmc-zoomout', html).on('click', this.zoomOut)
         $('.mtmc-topleft', html).on('click', this.moveTopLeft)

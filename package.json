@@ -1,8 +1,8 @@
 {
-  "name": "mobile-token-movement-revived",
-  "version": "1.0.20",
-  "author": "Matthijs Kok && Nicolas Assouline",
+  "name": "in-person-toolbox",
+  "version": "1.0.21",
+  "author": "Nicolas Assouline",
   "scripts": {
-    "package": "zip -r mobile-token-movement-revived-$npm_package_version.zip languages scripts styles templates LICENSE module.json package.json README.md"
+    "package": "in-person-toolbox-$npm_package_version.zip languages scripts styles templates LICENSE module.json package.json README.md"
   }
 }
