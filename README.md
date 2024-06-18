@@ -10,8 +10,8 @@ A collection of quality-of-life tools I use when DM-ing for in-person groups.
 
 ## Recommended modules
 - [**TouchVTT**](https://foundryvtt.com/packages/touch-vtt) for easier navigation/token selection on mobile
-- [**Stream View**] on a TV screen for a centralized map view (players can control their tokens on their mobile devices)
-- [**Monk's Common Display**] for more control over the players' view
+- [**Stream View**](https://foundryvtt.com/packages/stream-view) on a TV screen for a centralized map view (players can control their tokens on their mobile devices)
+- [**Monk's Common Display**](https://foundryvtt.com/packages/monks-common-display) for more control over the players' view
 
 ## Recommended setup
 I usually run games from my laptop using the GM view. A separate window is cast to a nearby TV logged in as an "observer" user through Stream view (this user also owns all player tokens, so they have shared vision)

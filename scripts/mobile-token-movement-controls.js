@@ -5,6 +5,8 @@ import {
     VIEWPOINT_PAN_THRESHOLD_MULTIPLIER
 } from "./constants.js";
 
+const DEBUG_MESSAGES = game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING);
+
 export class MobileTokenMovementControls extends Application {
     tokenCycleIndex = 0;
 
@@ -30,11 +32,11 @@ export class MobileTokenMovementControls extends Application {
 
     async move(x, y) {
         const token = this.getActiveToken();
-        if (!token) return;
+        if (!token || (!game.user.isGM && game.paused)) return;
 
         const newPoint = {x: token.x + token.w * x, y: token.y + token.h * y};
 
-        if (game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING)) {
+        if (DEBUG_MESSAGES) {
             console.info(
                 `Attempting to move token from (${token.x}, ${token.y}) to ${JSON.stringify(newPoint)} (Collision: ${token.checkCollision(newPoint)})`
             );
@@ -65,7 +67,7 @@ export class MobileTokenMovementControls extends Application {
             x: token.x + token.w / 2,
             y: token.y + token.h / 2,
             scale: canvas.scene._viewPosition.scale,
-        })
+        });
     };
 
     isViewCentered = () => {
@@ -89,8 +91,8 @@ export class MobileTokenMovementControls extends Application {
     };
 
     cycleActiveToken = () => {
-        this.tokenCycleIndex++
-        this.clipCycleIndexValue()
+        this.tokenCycleIndex++;
+        this.clipCycleIndexValue();
     };
 
     clipCycleIndexValue = () => {
@@ -130,18 +132,18 @@ export class MobileTokenMovementControls extends Application {
     moveBottomRight = async () => this.move(1, 1);
 
     activateListeners(html) {
-        super.activateListeners(html)
+        super.activateListeners(html);
 
-        $('.mtmc-select', html).on('click', this.focusToken)
-        $('.mtmc-zoomin', html).on('click', this.zoomIn)
-        $('.mtmc-zoomout', html).on('click', this.zoomOut)
-        $('.mtmc-topleft', html).on('click', this.moveTopLeft)
-        $('.mtmc-left', html).on('click', this.moveLeft)
-        $('.mtmc-bottomleft', html).on('click', this.moveBottomLeft)
-        $('.mtmc-top', html).on('click', this.moveTop)
-        $('.mtmc-bottom', html).on('click', this.moveBottom)
-        $('.mtmc-topright', html).on('click', this.moveTopRight)
-        $('.mtmc-right', html).on('click', this.moveRight)
-        $('.mtmc-bottomright', html).on('click', this.moveBottomRight)
+        $('.mtmc-select', html).on('click', this.focusToken);
+        $('.mtmc-zoomin', html).on('click', this.zoomIn);
+        $('.mtmc-zoomout', html).on('click', this.zoomOut);
+        $('.mtmc-topleft', html).on('click', this.moveTopLeft);
+        $('.mtmc-left', html).on('click', this.moveLeft);
+        $('.mtmc-bottomleft', html).on('click', this.moveBottomLeft);
+        $('.mtmc-top', html).on('click', this.moveTop);
+        $('.mtmc-bottom', html).on('click', this.moveBottom);
+        $('.mtmc-topright', html).on('click', this.moveTopRight);
+        $('.mtmc-right', html).on('click', this.moveRight);
+        $('.mtmc-bottomright', html).on('click', this.moveBottomRight);
     }
 }

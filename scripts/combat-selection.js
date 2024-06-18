@@ -1,4 +1,12 @@
-import {SELECTION_OPTIONS, IN_COMBAT_FOCUS_SETTING, IN_COMBAT_SELECT_SETTING, MODULE_NAME} from "./constants.js";
+import {
+    SELECTION_OPTIONS,
+    IN_COMBAT_FOCUS_SETTING,
+    IN_COMBAT_SELECT_SETTING,
+    MODULE_NAME,
+    DEBUG_MESSAGES_SETTING
+} from "./constants.js";
+
+const DEBUG_MESSAGES = game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING);
 
 function selectToken(token) {
     // enemy tokens don't need to be selected for player characters
@@ -22,6 +30,13 @@ export async function updateActiveToken() {
     const focusActiveToken = game.settings.get(MODULE_NAME, IN_COMBAT_FOCUS_SETTING);
 
     const activeToken = game.combats?.active?.combatant?.token;
+
+    if (DEBUG_MESSAGES) {
+        console.info(`Selection options: ${selectActiveToken}`);
+        console.info(`Focus options: ${focusActiveToken}`);
+        console.info(`Active token: ${JSON.stringify(activeToken)}`);
+    }
+
     if (!activeToken) return;
 
     switch (selectActiveToken) {
