@@ -1,6 +1,6 @@
 {
   "name": "in-person-toolbox",
-  "version": "1.0.22",
+  "version": "1.0.36",
   "author": "Nicolas Assouline",
   "scripts": {
     "package": "in-person-toolbox-$npm_package_version.zip languages scripts styles templates LICENSE module.json package.json README.md"

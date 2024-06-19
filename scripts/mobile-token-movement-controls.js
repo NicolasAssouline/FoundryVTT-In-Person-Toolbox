@@ -1,11 +1,7 @@
 import {
     CONTROLS_TEMPLATE_PATH,
-    DEBUG_MESSAGES_SETTING,
-    MODULE_NAME,
     VIEWPOINT_PAN_THRESHOLD_MULTIPLIER
 } from "./constants.js";
-
-const DEBUG_MESSAGES = game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING);
 
 export class MobileTokenMovementControls extends Application {
     tokenCycleIndex = 0;
@@ -36,21 +32,17 @@ export class MobileTokenMovementControls extends Application {
 
         const newPoint = {x: token.x + token.w * x, y: token.y + token.h * y};
 
-        if (DEBUG_MESSAGES) {
-            console.info(
-                `Attempting to move token from (${token.x}, ${token.y}) to ${JSON.stringify(newPoint)} (Collision: ${token.checkCollision(newPoint)})`
-            );
+        if (token.checkCollision(newPoint) || !token.document.canUserModify(game.user, "update")) {
+            return;
         }
 
-        if (!token.checkCollision(newPoint) && token.document.canUserModify(game.user, "update")) {
-            await token.document.update(newPoint);
-            await canvas.animatePan({
-                duration: 250,
-                x: Math.round(newPoint.x + token.w / 2),
-                y: Math.round(newPoint.y + token.h / 2),
-                scale: canvas.scene._viewPosition.scale,
-            });
-        }
+        await token.document.update(newPoint);
+        await canvas.animatePan({
+            duration: 250,
+            x: Math.round(newPoint.x + token.w / 2),
+            y: Math.round(newPoint.y + token.h / 2),
+            scale: canvas.scene._viewPosition.scale,
+        });
     }
 
     focusToken = async () => {

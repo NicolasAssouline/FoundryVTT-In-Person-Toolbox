@@ -1,5 +1,5 @@
 {
-  "MobileTokenMovement": {
+  "MobileUI": {
     "dialog": {
       "content": "It looks like you are using a mobile device. Would you like to enable the Mobile Token Movement UI?",
       "yes": "Yes",

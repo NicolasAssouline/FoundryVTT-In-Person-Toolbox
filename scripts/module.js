@@ -1,8 +1,9 @@
-import { MobileTokenMovementControls } from './mobile-token-movement-controls.js';
-import { updateActiveToken } from './combat-selection.js';
+import {MobileTokenMovementControls} from './mobile-token-movement-controls.js';
+import {updateActiveToken} from './combat-selection.js';
 import {
-    DEBUG_MESSAGES_SETTING, SELECTION_OPTIONS,
-    IN_COMBAT_FOCUS_SETTING, IN_COMBAT_SELECT_SETTING,
+    SELECTION_OPTIONS,
+    IN_COMBAT_FOCUS_SETTING,
+    IN_COMBAT_SELECT_SETTING,
     MIN_HEIGHT_SETTING,
     MIN_WIDTH_SETTING,
     MODULE_NAME
@@ -16,7 +17,7 @@ Hooks.once('init', () => {
         config: true,
         default: 600,
         type: Number,
-        requiresReload: true
+        requiresReload: true,
     });
 
     game.settings.register(MODULE_NAME, MIN_HEIGHT_SETTING, {
@@ -26,7 +27,7 @@ Hooks.once('init', () => {
         config: true,
         default: 0,
         type: Number,
-        requiresReload: true
+        requiresReload: true,
     });
 
     game.settings.register(MODULE_NAME, IN_COMBAT_FOCUS_SETTING, {
@@ -34,7 +35,7 @@ Hooks.once('init', () => {
         scope: "world",
         config: true,
         choices: SELECTION_OPTIONS,
-        default: SELECTION_OPTIONS.PLAYERS_ONLY,
+        default: SELECTION_OPTIONS.Players,
         type: String,
     });
 
@@ -43,17 +44,8 @@ Hooks.once('init', () => {
       scope: "world",
       config: true,
       choices: SELECTION_OPTIONS,
-      default: SELECTION_OPTIONS.EVERYONE,
+      default: SELECTION_OPTIONS.GM,
       type: String,
-    });
-
-    game.settings.register(MODULE_NAME, DEBUG_MESSAGES_SETTING, {
-        name: "Write debug messages to the console",
-        hint: "Write debug messages to the console to diagnose issues more easily. Turn off to reduce clutter",
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean,
     });
 })
 
@@ -66,21 +58,20 @@ Hooks.once('ready', () => {
         (game.canvas.app.screen.width <= minScreenWidth || game.canvas.app.screen.height <= minScreenHeight);
 
     new Dialog({
-        title: 'Mobile Token Movement',
-        content: game.i18n.localize('MobileTokenMovement.dialog.content'),
+        title: 'Mobile UI',
+        content: game.i18n.localize('MobileUI.dialog.content'),
         buttons: {
             yes: {
-                label: game.i18n.localize('MobileTokenMovement.dialog.yes'),
+                label: game.i18n.localize('MobileUI.dialog.yes'),
                 icon: '<i class="fas fa-mobile-alt"></i>',
                 callback: () => {
                     $('body').toggleClass('enable-mobile-token-movement-ui', true)
                     new MobileTokenMovementControls().render(true)
-                }
-            },
-            no: {
-                label: game.i18n.localize('MobileTokenMovement.dialog.no'),
+                },
+            }, no: {
+                label: game.i18n.localize('MobileUI.dialog.no'),
                 icon: '<i class="fa fa-ban"></i>',
-                callback: () => {}
+                callback: () => {},
             }
         }
     }).render(isMobileDevice);

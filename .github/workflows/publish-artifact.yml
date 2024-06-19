@@ -16,8 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Get package version
-        run: echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
+      - name: Get package name and version
+        run: |
+          echo "name=$(jq -r .name package.json)" >> $GITHUB_ENV
+          echo "version=$(jq -r .version package.json)" >> $GITHUB_ENV
 
       - name: Substitute Manifest and Download Links For Versioned Ones
         uses: microsoft/variable-substitution@v1
@@ -27,20 +29,20 @@ jobs:
           version: ${{env.version}}
           url: https://github.com/${{github.repository}}
           manifest: https://github.com/${{github.repository}}/releases/download/v${{env.version}}/module.json
-          download: https://github.com/${{github.repository}}/releases/download/v${{env.version}}/${{ github.event.repository.name }}.zip
+          download: https://github.com/${{github.repository}}/releases/download/v${{env.version}}/${{env.name}}.zip
 
 
       - name: Bundle module
         run: |
-          zip -r ${{ github.event.repository.name }}.zip languages scripts styles templates LICENSE module.json package.json README.md
+          zip -r ${{env.name}}.zip languages scripts styles templates LICENSE module.json package.json README.md
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
             module.json
-            ${{ github.event.repository.name }}.zip
-          name: "${{ github.event.repository.name }} - version ${{ env.version }}"
+            ${{env.name}}.zip
+          name: "${{env.name}} - version ${{env.version}}"
           make_latest: true
-          tag_name: v${{ env.version }}
+          tag_name: v${{env.version}}
           generate_release_notes: true

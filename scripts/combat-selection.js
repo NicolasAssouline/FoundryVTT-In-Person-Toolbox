@@ -3,25 +3,25 @@ import {
     IN_COMBAT_FOCUS_SETTING,
     IN_COMBAT_SELECT_SETTING,
     MODULE_NAME,
-    DEBUG_MESSAGES_SETTING
 } from "./constants.js";
-
-const DEBUG_MESSAGES = game.settings.get(MODULE_NAME, DEBUG_MESSAGES_SETTING);
 
 function selectToken(token) {
     // enemy tokens don't need to be selected for player characters
     if (!game.user.isGM && !token.hasPlayerOwner) return;
 
     canvas.tokens.releaseAll();
-    canvas.tokens.selectObjects([token]);
+    token.control();
 }
 
 async function focusToken(token) {
+    // don't want to reveal locations of hidden tokens to players
+    if (!game.user.isGM && !token.hasPlayerOwner && token.data.hidden) return;
+
     await canvas.animatePan({
-        duration: 150,
+        speed: 1500,
+        easing: "easeInOutQuad",
         x: token.x + token.w / 2,
         y: token.y + token.h / 2,
-        scale: canvas.scene._viewPosition.scale,
     });
 }
 
@@ -29,36 +29,32 @@ export async function updateActiveToken() {
     const selectActiveToken = game.settings.get(MODULE_NAME, IN_COMBAT_SELECT_SETTING);
     const focusActiveToken = game.settings.get(MODULE_NAME, IN_COMBAT_FOCUS_SETTING);
 
-    const activeToken = game.combats?.active?.combatant?.token;
+    const activeCombatant = game.combats?.active?.combatant;
+    if (!activeCombatant) return;
 
-    if (DEBUG_MESSAGES) {
-        console.info(`Selection options: ${selectActiveToken}`);
-        console.info(`Focus options: ${focusActiveToken}`);
-        console.info(`Active token: ${JSON.stringify(activeToken)}`);
-    }
-
+    const activeToken = canvas.tokens.get(activeCombatant.tokenId);
     if (!activeToken) return;
 
     switch (selectActiveToken) {
-        case SELECTION_OPTIONS.DM_ONLY:
+        case SELECTION_OPTIONS.GM:
             if (game.user.isGM) selectToken(activeToken);
             break;
-        case SELECTION_OPTIONS.PLAYERS_ONLY:
+        case SELECTION_OPTIONS.Players:
             if (!game.user.isGM) selectToken(activeToken);
             break;
-        case SELECTION_OPTIONS.EVERYONE:
+        case SELECTION_OPTIONS.Everyone:
             selectToken(activeToken);
             break;
     }
 
     switch (focusActiveToken) {
-        case SELECTION_OPTIONS.DM_ONLY:
+        case SELECTION_OPTIONS.GM:
             if (game.user.isGM) await focusToken(activeToken);
             break;
-        case SELECTION_OPTIONS.PLAYERS_ONLY:
+        case SELECTION_OPTIONS.Players:
             if (!game.user.isGM) await focusToken(activeToken);
             break;
-        case SELECTION_OPTIONS.EVERYONE:
+        case SELECTION_OPTIONS.Everyone:
             await focusToken(activeToken);
             break;
     }
